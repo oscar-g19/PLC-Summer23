@@ -14,9 +14,9 @@ echo "Welcome, " . $_SESSION['username'] . "!";
 ?>
     
     <p>Please choose one of the following options:</p>
-    <button onclick="location.href='./demo/Database-project23/withdraw.html'">Withdraw</button>
-    <button onclick="location.href='./demo/Database-project23/deposit.html'">Deposit</button>
+    <button onclick="location.href='withdraw.html'">Withdraw</button>
+    <button onclick="location.href='deposit.html'">Deposit</button>
 	<button onclick="location.href='history.html'">Spending History</button>
-  <button onclick="location.href='./may2/home.html'">Log Out</button>
+  <button onclick="location.href='index.html'">Log Out</button>
   </body>
 </html>
