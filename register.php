@@ -1,8 +1,31 @@
 <?php
-$serverName = "localhost";
-$userName = "root";
-$passwordDB = "";
-$dbName = "bankbcnf";
+
+$firebase_project_id = "bank-portal-4d74d";
+$database_url = "https://$firebase_project_id.firebaseio.com/";
+
+// funtion to send data to Firebase
+
+function writeToFirebase($node, $data) {
+	global $database_url;
+	$url = $database_url.$node.'json';
+
+	$ch = curl.init($url);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+	$response = curl_exec($ch);
+	curl_close($ch);
+
+	return json_decode($response, true);
+}
+
+
+// $serverName = "localhost";
+// $userName = "root";
+// $passwordDB = "";
+// $dbName = "bankbcnf";
+
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	// Get form data
@@ -21,30 +44,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	} 
 		// Save user data to database or file
 	
+		$user_data = array(
+			"name" => $fname,
+        "address" => $addy,
+        "phone_number" => $Pnum,
+        "password" => password_hash($usrpwd, PASSWORD_DEFAULT) // Hash the password
+		);
+		
+		$firebase_node = "Users/$user_name"; // Use the username as the unique ID
+    	$response = writeToFirebase($firebase_node, $user_data);
 
-// (B) CONNECT TO DATABASE
-try{
-    // Connect To MySQL Database
-    $con = new PDO("mysql:host=$serverName;dbname=$dbName", $userName, $passwordDB);
-
-    $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    echo "Connection successful";
-    $sql = "INSERT INTO user ( UserID, Name, Address, PhoneNumber, password)
-	VALUES ('$user_name', '$fname', '$addy', '$Pnum', '$usrpwd')";
-	$con->exec($sql);
-	echo "User created!";
-	// Redirect to success page
-	header('Location: index.html');
-	exit;
-} catch (PDOException $ex) {
-    
-    echo 'Error Not Connected: '.$ex->getMessage();
-    
-}
-	
-
-	
-	
+		if(isset($response['name'])){
+			echo "User created!";
+			header('Location: index.html');
+			exit;
+		}
+		else{
+			exho "Error creating user.";
+		}
 }
 ?>
