@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,16 +6,17 @@
   </head>
   <body>
     <?php
-session_start();
-// User is logged in, show the dashboard
-echo "Welcome, " . $_SESSION['username'] . "!";
+    session_start();
+    // Hardcoded session data (Simulated login)
+    $_SESSION['username'] = 'JohnDoe'; // Replace 'JohnDoe' with the desired username
 
-?>
+    // User is logged in, show the dashboard
+    echo "Welcome, " . $_SESSION['username'] . "!";
+    ?>
     
     <p>Please choose one of the following options:</p>
     <button onclick="location.href='withdraw.html'">Withdraw</button>
     <button onclick="location.href='deposit.html'">Deposit</button>
-	<button onclick="location.href='history.html'">Spending History</button>
-  <button onclick="location.href='index.html'">Log Out</button>
+    <button onclick="location.href='index.html'">Log Out</button>
   </body>
 </html>
