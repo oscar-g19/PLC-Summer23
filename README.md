@@ -21,3 +21,12 @@ How to run Bank Portal program on Mac
     Type "localhost/PLC-Summer23" into search bar 
 
     Use "JohnDoe" and "password" for username and password respectively when logging in.
+
+How to run on Windows
+
+    Install WampServer: https://www.wampserver.com/en/
+
+    Run installer
+
+    Step-by-step guide: https://www.youtube.com/watch?v=bG_PMkHuRao&ab_channel=GeekyScript
+
