@@ -31,7 +31,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // For demonstration purposes, display the updated balance after deposit
     echo "Updated Balance after Deposit: $" . $accounts[$usr_acct]['Balance'];
-
-    // In a real application, you would write the updated data back to a JSON file or a database
 }
 ?>
